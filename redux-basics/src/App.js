@@ -65,6 +65,7 @@ store.subscribe(() => {
   console.log("Store update!", store.getState())
 });
 
+// Actions 
 store.dispatch({
   type: "ADD",
   payload: 10
