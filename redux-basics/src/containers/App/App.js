@@ -6,6 +6,8 @@ import '../App/App.css';
 import { User } from '../../components/User/User';
 import { Main } from '../../components/Main/Main';
 
+import {setName} from "../../actions/userActions";
+
 class App extends React.Component {
 
   render() {
@@ -30,10 +32,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setName(name) {
-            dispatch({
-                type:"SET_NAME",
-                payload: name
-            });
+            dispatch(setName(name));
         }   
     }
 };
