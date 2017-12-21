@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers } from "redux";
+// REDUX IMPORTS
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import logger from 'redux-logger'
+import 
+// END
 import logo from './logo.svg';
 import './App.css';
 
@@ -79,9 +83,18 @@ const userReducer = (state = {
   return state;
 };
 
+// Creating Middleware
+
+const myLogger = (store) => (next) => (action) => {
+  console.log("Logged Action: ", action);
+  next(action);
+}
+
 // Store
-const store = createStore(combineReducers({mathReducer, userReducer
-}));
+const store = createStore(combineReducers(
+  {mathReducer, userReducer}), 
+  {}, 
+  applyMiddleware(logger));
 
 // Console for Debug
 store.subscribe(() => {
