@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import logo from './logo.svg';
 import './App.css';
 
@@ -33,13 +33,12 @@ class App extends React.Component {
 
 export default App;
 
-const initialState = {
+// Multiple Reducers
+
+const mathReducer = (state = {
   result: 1,
   lastValues: [],
-  username: "Max"
-}
-
-const reducer = (state = initialState, action) => {
+}, action) => {
   switch (action.type) {
     case "ADD":
       state = {
@@ -59,8 +58,32 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-const store = createStore(reducer);
+const userReducer = (state = {
+    name: "Scott",
+    age: 22,
+}, action) => {
+  switch (action.type) {
+    case "SET_NAME":
+      state = {
+          ...state,
+          name: action.payload,
+        };
+      break;
+    case "SET_AGE":
+      state = {
+        ...state,
+        age: action.payload
+      };
+      break;
+  }
+  return state;
+};
 
+// Store
+const store = createStore(combineReducers({mathReducer, userReducer
+}));
+
+// Console for Debug
 store.subscribe(() => {
   console.log("Store update!", store.getState())
 });
@@ -79,4 +102,14 @@ store.dispatch({
 store.dispatch({
   type: "SUBTRACT",
   payload: 10
+});
+
+store.dispatch({
+  type: "SET_NAME",
+  payload: "Scotty V"
+});
+
+store.dispatch({
+  type: "SET_AGE",
+  payload: 23
 });
