@@ -4,14 +4,14 @@ import {connect} from "react-redux";
 import '../App/App.css';
 
 import { User } from '../../components/User/User';
-import Main from '../../components/Main/Main';
+import { Main } from '../../components/Main/Main';
 
 class App extends React.Component {
 
   render() {
       return (
           <div className="container">
-              <Main />
+              <Main setName={this.props.setName}/>
               <User username={this.props.user.name}/>
           </div>
       );

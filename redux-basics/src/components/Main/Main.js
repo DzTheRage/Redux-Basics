@@ -1,9 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
 
-class Main extends React.Component {
+export const Main = (props) => {
 
-    render() {
         return (
             <div>
                 <div className="row">
@@ -15,31 +13,9 @@ class Main extends React.Component {
                     <div className="col-xs-12">
                         <button
                             className="btn btn-primary"
-                            onClick={() => this.props.setName("Vance")}>Change the Username</button>
+                            onClick={() => props.setName("Vance")}>Change the Username</button>
                     </div>
                 </div>
             </div>
         );
     }
-}
-
-// Methods to Get Store
-
-const mapStateToProps = (state) => {
-    return {
-        user: state.userReducer,  
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setName(name) {
-            dispatch({
-                type:"SET_NAME",
-                payload: name
-            });
-        }   
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
