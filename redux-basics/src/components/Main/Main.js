@@ -1,15 +1,7 @@
 import React from "react";
+import {connect} from "react-redux";
 
-export class Main extends React.Component {
-    
-    constructor(props){
-        super(props);
-        this.handleUserClick = this.handleUserClick.bind(this);
-    }
-
-    handleUserClick(name){
-        this.props.changeUsername(name)
-    }
+class Main extends React.Component {
 
     render() {
         return (
@@ -23,10 +15,31 @@ export class Main extends React.Component {
                     <div className="col-xs-12">
                         <button
                             className="btn btn-primary"
-                            onClick={() => this.handleUserClick('Anna')}>Change the Username</button>
+                            onClick={() => this.props.setName("Vance")}>Change the Username</button>
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+// Methods to Get Store
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer,  
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setName(name) {
+            dispatch({
+                type:"SET_NAME",
+                payload: name
+            });
+        }   
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

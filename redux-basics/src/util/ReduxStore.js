@@ -1,14 +1,8 @@
-// Base 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App/App';
-import registerServiceWorker from './registerServiceWorker';
-
 // REDUX IMPORTS
+import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from 'redux-logger';
-import {Provider} from "react-redux";
+import {Provider} from "react-dux";
 
 // Multiple Reducers
 
@@ -71,17 +65,31 @@ const mathReducer = (state = {
   
   // Console for Debug
   store.subscribe(() => {
-   // console.log("Store update!", store.getState())
+    console.log("Store update!", store.getState())
   });
   
   // Actions 
-
-
-  // Rendering APP
-
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-     document.getElementById('root'));
-registerServiceWorker();
+  store.dispatch({
+    type: "ADD",
+    payload: 10
+  });
+  
+  store.dispatch({
+    type: "ADD",
+    payload: 9,
+  });
+  
+  store.dispatch({
+    type: "SUBTRACT",
+    payload: 10
+  });
+  
+  store.dispatch({
+    type: "SET_NAME",
+    payload: "Scotty V"
+  });
+  
+  store.dispatch({
+    type: "SET_AGE",
+    payload: 23
+  });
